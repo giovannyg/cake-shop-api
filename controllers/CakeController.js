@@ -30,7 +30,14 @@ router.put('/:id', (req, res) => {
   };
   Cake.findOneAndUpdate(req.params.id, {$set: cakeNewData }, { new: true }, (err, doc) => {
     if(!err) { res.send(doc); return; }
-    return res.send(`No cake was found with given id ${JSON.stringify(err, undefined, 2)}`);
+    return res.send(`Error updating cake: ${JSON.stringify(err, undefined, 2)}`);
+  });
+});
+
+router.get('/:id', (req, res) => {
+  Cake.findById(req.params.id, (err, doc) => {
+    if(!err) { res.send(doc); return; }
+    return res.send(`Error getting cake: ${JSON.stringify(err, undefined, 2)}`);
   });
 });
 

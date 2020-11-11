@@ -1,11 +1,13 @@
 const express = require('express')
+const bodyParser = require('body-parser');
 
-var app = express();
-app.use(express.json());
+require('./db');
+const cakeController = require('./controllers/CakeController');
 
-app.get('/cakes', (req, res) => {
-    res.send('A phrase attribute is required');
-})
-
+const app = express();
+app.use(bodyParser.json());
 
 app.listen(3000);
+
+app.use('/cakes', cakeController);
+
